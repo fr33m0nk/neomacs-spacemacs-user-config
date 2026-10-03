@@ -739,6 +739,17 @@ If you are unsure, try setting them in `dotspacemacs/user-config' first."
   ;; Neomacs compatibility shims; must run before packages are installed
   (load (file-truename (concat dotspacemacs-directory "neomacs-compat.el")) nil t)
 
+  ;; macOS 14+ tags files with the com.apple.provenance extended attribute, and
+  ;; bsdtar then writes an AppleDouble "._*" entry for each one.  quelpa builds
+  ;; recipe packages by shelling out to /usr/bin/tar, and `package-tar-file-info'
+  ;; takes the FIRST tar entry as the package directory -- which becomes
+  ;; "._<pkg>-<version>" instead of "<pkg>-<version>".  It then looks for a
+  ;; -pkg.el that is not there and dies with
+  ;;     (error (wrong-type-argument package-desc nil))
+  ;; This breaks every :fetcher recipe package; code-review is the one this
+  ;; config installs.  COPYFILE_DISABLE=1 tells bsdtar to omit the "._*" entries.
+  (setenv "COPYFILE_DISABLE" "1")
+
   ;; https://github.com/catppuccin/emacs?tab=readme-ov-file#spacemacs
   (setq catppuccin-flavor 'mocha) ;'frappe 'latte 'macchiato or 'mocha
 
