@@ -814,6 +814,10 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
 
+  ;; Machine-local project registry (gitignored); NOERROR so a clone without
+  ;; it just skips this.  See .gitignore.
+  (load (file-truename (concat dotspacemacs-directory "lifecheq-projects.el")) nil t)
+
   ;; dotspacemacs/user-config divided into files
   ;; - comment files to skip loading specific configuration
 

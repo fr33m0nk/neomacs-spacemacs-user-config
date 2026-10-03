@@ -3,3 +3,8 @@
 # Environment variables are automatically generated
 .spacemacs.env
 recentf
+
+# Machine-local project registry: absolute paths and internal repository
+# names, loaded with NOERROR from dotspacemacs/user-config so a clone without
+# it simply skips the step.
+lifecheq-projects.el
