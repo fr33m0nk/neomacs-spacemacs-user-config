@@ -1,0 +1,3 @@
+[submodule "layers/spacemacs-agentic"]
+	path = layers/spacemacs-agentic
+	url = https://github.com/vv111y/spacemacs-agentic

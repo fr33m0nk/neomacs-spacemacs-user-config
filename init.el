@@ -227,6 +227,19 @@ This function should only modify configuration layer settings."
      (yaml :variables
            yaml-enable-lsp t)
 
+     ;; Agentic coding -- https://github.com/vv111y/spacemacs-agentic
+     ;; Vendored as a git submodule under layers/; Spacemacs picks up
+     ;; $SPACEMACSDIR/layers automatically and prefers it over
+     ;; ~/.emacs.d/private (core-configuration-layer.el:48-57), so the layer
+     ;; stays inside this versioned config rather than in the Spacemacs clone.
+     ;; Defaults pull ai-code, acp, agent-shell, agent-review and agent-recall;
+     ;; the optional backends (eca, claude-code, claude-code-ide) stay off --
+     ;; agent-shell already drives the claude CLI over ACP.
+     (spacemacs-agentic :variables
+                        agentic-systems-ai-code-backend 'agent-shell
+                        agentic-systems-agent-recall-search-paths '("~/Work"
+                                                                    "~/Pets/Projects"))
+
      ) ; End of dotspacemacs-configuration-layers
 
 
