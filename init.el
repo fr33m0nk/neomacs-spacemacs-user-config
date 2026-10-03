@@ -736,6 +736,9 @@ configuration.
 It is mostly for variables that should be set before packages are loaded.
 If you are unsure, try setting them in `dotspacemacs/user-config' first."
 
+  ;; Neomacs compatibility shims; must run before packages are installed
+  (load (file-truename (concat dotspacemacs-directory "neomacs-compat.el")) nil t)
+
   ;; https://github.com/catppuccin/emacs?tab=readme-ov-file#spacemacs
   (setq catppuccin-flavor 'mocha) ;'frappe 'latte 'macchiato or 'mocha
 
