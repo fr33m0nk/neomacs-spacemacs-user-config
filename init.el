@@ -336,7 +336,14 @@ It should only modify the values of Spacemacs settings."
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
    ;; dotspacemacs-startup-banner 'official
-   dotspacemacs-startup-banner (concat dotspacemacs-directory "banners/practicalli-logo.svg")
+   ;; Known quirk: this banner renders slightly right of centre.  Spacemacs
+   ;; centres with floor((window-width - (image-size spec)) / 2) in CHARACTER
+   ;; columns, and `auto' scale fits by height with (min factor 1) -- so this
+   ;; short 4:1 banner (170.94px tall) is never scaled, unlike the tall square
+   ;; logos that centre correctly.  Lower `dotspacemacs-startup-banner-scale'
+   ;; to a float (e.g. 0.6) to shrink the banner and the offset with it.
+   ;; Alternatives kept alongside: om-mani-padme-hum.svg, *.png rasters.
+   dotspacemacs-startup-banner (concat dotspacemacs-directory "banners/cyberpunk-2077-logo.svg")
 
    ;; Scale factor controls the scaling (size) of the startup banner. Default
    ;; value is `auto' for scaling the logo automatically to fit all buffer
