@@ -164,8 +164,13 @@ This function should only modify configuration layer settings."
 
      ;; SPC ' runs shell in a popup buffer
      (shell :variables
-            shell-default-shell 'vterm
-            shell-default-term-shell "/usr/bin/zsh"
+            ;; vterm and multi-vterm disabled: Neomacs ships neo-term, and
+            ;; vterm needs a native module.  eat is pure elisp and, unlike
+            ;; neo-term, also works under `neomacs -nw'.
+            shell-enable-vterm-support nil
+            shell-default-shell 'eat
+            ;; /usr/bin/zsh is the Linux path; macOS ships /bin/zsh
+            shell-default-term-shell "/bin/zsh"
             shell-default-height 30
             shell-default-position 'bottom)
 
@@ -404,10 +409,24 @@ It should only modify the values of Spacemacs settings."
    ;; fixed-pitch faces. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("Fira Code"
-                               :size 12.0
-                               :weight normal
-                               :width normal)
+   ;; Prioritised list: Spacemacs picks the first family `find-font' resolves.
+   ;; Nerd Font patched variants are required for icon glyphs (eza/lsd/starship
+   ;; output in neo-term and eat); plain "Fira Code" is NOT patched and renders
+   ;; them as tofu boxes.  The "Mono" variants force icons to a single cell so
+   ;; column alignment survives.  GUI only -- in `neomacs -nw' the font comes
+   ;; from the host terminal emulator, not from here.
+   dotspacemacs-default-font '(("JetBrainsMono Nerd Font Mono"
+                                :size 12.0
+                                :weight normal
+                                :width normal)
+                               ("Hack Nerd Font Mono"
+                                :size 12.0
+                                :weight normal
+                                :width normal)
+                               ("Fira Code"
+                                :size 12.0
+                                :weight normal
+                                :width normal))
 
    ;; Default icons font, it can be `all-the-icons' or `nerd-icons'.
    dotspacemacs-default-icons-font 'all-the-icons
